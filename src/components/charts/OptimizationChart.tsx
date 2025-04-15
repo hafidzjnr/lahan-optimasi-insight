@@ -56,7 +56,7 @@ export const OptimizationChart: React.FC<OptimizationChartProps> = ({
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value) => `${value.toFixed(2)} ha`} />
+                <Tooltip formatter={(value) => `${Number(value).toFixed(2)} ha`} />
                 <Legend />
               </PieChart>
             </ResponsiveContainer>
