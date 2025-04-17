@@ -1,56 +1,64 @@
 
 /**
- * Utility functions for agricultural land optimization using calculus principles
+ * Utilitas untuk optimasi lahan pertanian menggunakan prinsip kalkulus
+ * 
+ * Pendekatan matematis yang digunakan menggabungkan beberapa konsep:
+ * 1. Fungsi Produksi Cobb-Douglas: Model matematis untuk menghitung output produksi
+ * 2. Analisis Titik Optimum: Menggunakan turunan untuk menemukan titik produktivitas maksimal
+ * 3. Faktor Diminishing Returns: Mempertimbangkan penurunan efisiensi seiring penambahan input
  */
 
 /**
- * Interface for land optimization parameters
+ * Antarmuka parameter optimasi lahan pertanian
+ * Menggambarkan berbagai faktor yang mempengaruhi produktivitas lahan
  */
 export interface OptimizationParams {
-  landArea: number;       // Area of land in hectares
-  soilQuality: number;    // Quality index (0-100)
-  waterAvailability: number; // Water availability index (0-100)
-  fertilizerAmount: number;  // Fertilizer in kg/hectare
-  seedQuality: number;    // Seed quality index (0-100)
-  cropType: string;       // Type of crop
+  landArea: number;       // Luas lahan dalam hektar
+  soilQuality: number;    // Indeks kualitas tanah (0-100)
+  waterAvailability: number; // Indeks ketersediaan air (0-100)
+  fertilizerAmount: number;  // Jumlah pupuk dalam kg/hektar
+  seedQuality: number;    // Indeks kualitas benih (0-100)
+  cropType: string;       // Jenis tanaman
 }
 
 /**
- * Interface for optimization results
+ * Antarmuka hasil optimasi, menampilkan berbagai metrik yang dihasilkan dari perhitungan
  */
 export interface OptimizationResult {
-  optimalLandArea: number;    // Optimal land area in hectares
-  expectedYield: number;      // Expected yield in tons
-  profitEstimate: number;     // Estimated profit
-  resourceEfficiency: number; // Resource efficiency score
-  sustainabilityScore: number; // Sustainability score
-  recommendedCropAllocation: Record<string, number>; // Recommended crop allocation
+  optimalLandArea: number;    // Luas lahan optimal dalam hektar
+  expectedYield: number;      // Perkiraan hasil panen dalam ton
+  profitEstimate: number;     // Estimasi keuntungan
+  resourceEfficiency: number; // Skor efisiensi sumber daya
+  sustainabilityScore: number; // Skor keberlanjutan
+  recommendedCropAllocation: Record<string, number>; // Rekomendasi alokasi tanaman
 }
 
 /**
- * Calculate optimal land area using Marginal Productivity approach
- * Based on the principle that optimal allocation occurs when marginal productivity equals marginal cost
- * @param params Land parameters
- * @returns Optimal land area in hectares
+ * Menghitung luas lahan optimal menggunakan pendekatan Produktivitas Marjinal
+ * 
+ * Prinsip dasar: Titik optimal terjadi ketika produktivitas marjinal sama dengan biaya marjinal
+ * 
+ * @param params Parameter-parameter lahan
+ * @returns Luas lahan optimal dalam hektar
  */
 export function calculateOptimalLandArea(params: OptimizationParams): number {
   const { landArea, soilQuality, waterAvailability, fertilizerAmount, seedQuality } = params;
   
-  // Base productivity factor based on soil quality and seed quality
+  // Faktor produktivitas dasar berdasarkan kualitas tanah dan benih
   const baseFactor = (soilQuality / 100) * (seedQuality / 100);
   
-  // Water efficiency factor - diminishing returns modeled with square root
+  // Faktor efisiensi air - model penurunan hasil dengan akar kuadrat
   const waterFactor = Math.sqrt(waterAvailability / 100);
   
-  // Fertilizer response curve - follows law of diminishing returns
-  // Using a logarithmic model: additional benefit decreases as more fertilizer is added
+  // Kurva respons pupuk - mengikuti hukum hasil yang semakin berkurang
+  // Menggunakan model logaritmik: manfaat tambahan menurun seiring penambahan pupuk
   const fertilizerFactor = 1 + (0.2 * Math.log(1 + fertilizerAmount / 100));
   
-  // Calculate optimal land area using derivative-based approach
-  // This models the point where the derivative of production function equals zero
+  // Menghitung luas lahan optimal menggunakan pendekatan turunan
+  // Memodelkan titik di mana turunan fungsi produksi sama dengan nol
   const optimalArea = landArea * baseFactor * waterFactor * fertilizerFactor;
   
-  // Ensure we don't exceed available land
+  // Memastikan tidak melebihi luas lahan yang tersedia
   return Math.min(optimalArea, landArea);
 }
 
