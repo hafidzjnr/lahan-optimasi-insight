@@ -1,11 +1,29 @@
 
 /**
- * Utilitas untuk optimasi lahan pertanian menggunakan prinsip kalkulus
+ * Utilitas untuk Optimasi Lahan Pertanian dengan Pendekatan Kalkulus
  * 
- * Pendekatan matematis yang digunakan menggabungkan beberapa konsep:
- * 1. Fungsi Produksi Cobb-Douglas: Model matematis untuk menghitung output produksi
- * 2. Analisis Titik Optimum: Menggunakan turunan untuk menemukan titik produktivitas maksimal
- * 3. Faktor Diminishing Returns: Mempertimbangkan penurunan efisiensi seiring penambahan input
+ * Metodologi Matematis:
+ * 
+ * 1. Fungsi Produksi Cobb-Douglas
+ * - Model matematis yang menggambarkan hubungan antara input produksi dan output
+ * - Bentuk umum: Y = A * L^α * K^β * F^γ * W^δ
+ *   Y: Total produksi
+ *   L: Input lahan
+ *   K: Input modal (kualitas benih)
+ *   F: Input pupuk
+ *   W: Input air
+ *   A: Faktor produktivitas total
+ *   α, β, γ, δ: Elastisitas output
+ * 
+ * 2. Analisis Titik Optimum melalui Turunan (Derivative Analysis)
+ * - Menggunakan kalkulus diferensial untuk menemukan titik produktivitas maksimal
+ * - Prinsip: f'(x) = 0, di mana f adalah fungsi produksi
+ * - Mencari kondisi di mana penambahan input tidak lagi meningkatkan output secara signifikan
+ * 
+ * 3. Hukum Hasil yang Semakin Berkurang (Diminishing Returns)
+ * - Setiap penambahan input akan memberikan kontribusi yang semakin menurun terhadap output
+ * - Dimodelkan menggunakan fungsi logaritmik dan akar kuadrat
+ * - Mencegah asumsi pertambahan input linear yang tidak realistis
  */
 
 /**
